@@ -35,7 +35,7 @@ export function Home() {
         <Card amount={9000} title='Total' type='result' />
       </Grid>
       <Form>
-        <input type='text' placeholder='Busque uma transação' />
+        <input type='text' placeholder='Busque por transações' />
         <button>
           <BiSearch size={20} />
           Buscar

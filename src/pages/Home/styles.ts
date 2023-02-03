@@ -48,6 +48,14 @@ export const Form = styled.form`
     display: flex;
     align-items: center;
     border-radius: 6px;
+
+    transition: all linear 0.3s;
+
+    &:hover {
+      border: 2px solid ${({ theme }) => theme.colors.green[500]};
+      background: ${({ theme }) => theme.colors.green[500]};
+      color: ${({ theme }) => theme.colors.white};
+    }
   }
 `;
 
