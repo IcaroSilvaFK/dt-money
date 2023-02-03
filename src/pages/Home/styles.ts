@@ -46,3 +46,5 @@ export const Form = styled.form`
     border-radius: 6px;
   }
 `;
+
+export const Table = styled.table``;
