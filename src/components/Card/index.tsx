@@ -2,10 +2,11 @@ import { MdArrowCircleUp, MdArrowCircleDown } from 'react-icons/md';
 import { BsCurrencyDollar } from 'react-icons/bs';
 
 import { Container, Body } from './styles';
+import { currencyFormat } from '../../utils/currencyFormatter';
 
 interface ICardProps {
   title: string;
-  amount: string;
+  amount: number;
   type: 'deposit' | 'withdraw' | 'result';
 }
 
@@ -13,7 +14,7 @@ export function Card(props: ICardProps) {
   const { amount, title, type } = props;
 
   return (
-    <Container type={type}>
+    <Container type={type} isNegative={amount < 0}>
       <div>
         <span>{title}</span>
         {type === 'deposit' && <MdArrowCircleUp size={32} />}
@@ -21,7 +22,7 @@ export function Card(props: ICardProps) {
         {type === 'result' && <BsCurrencyDollar size={32} />}
       </div>
       <Body>
-        <b>{amount}</b>
+        <b>{currencyFormat(amount)}</b>
       </Body>
     </Container>
   );

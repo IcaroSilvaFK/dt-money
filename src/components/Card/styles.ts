@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 type Props = {
   type: 'deposit' | 'withdraw' | 'result';
+  isNegative?: boolean;
 };
 
 export const Container = styled.div<Props>`
@@ -50,6 +51,21 @@ export const Container = styled.div<Props>`
     type === 'result' &&
     css`
       background: ${theme.colors.green[500]};
+      div {
+        svg {
+          fill: ${theme.colors.white};
+        }
+        b {
+          color: ${theme.colors.white};
+        }
+      }
+    `}
+
+    ${({ theme, type, isNegative }) =>
+    type === 'result' &&
+    isNegative &&
+    css`
+      background: ${theme.colors.red[500]};
       div {
         svg {
           fill: ${theme.colors.white};

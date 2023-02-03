@@ -1,19 +1,38 @@
 import { BiSearch } from 'react-icons/bi';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { Card } from '../../components/Card';
 import { Header } from '../../components/Header';
+
+import { Container, Grid, Form, Table, Tag } from './styles';
+import { useState } from 'react';
 import { currencyFormat } from '../../utils/currencyFormatter';
 
-import { Container, Grid, Form, Table } from './styles';
-
 export function Home() {
+  const [parentRef] = useAutoAnimate<HTMLTableSectionElement>();
+
+  const [transactions, setTransactions] = useState([
+    {
+      title: 'Desenvolvimento de site',
+      amount: 120,
+      type: 'Venda',
+      date: '13/04/2022',
+    },
+    {
+      title: 'Desenvolvimento de site',
+      amount: -40,
+      type: 'Venda',
+      date: '13/04/2022',
+    },
+  ]);
+
   return (
     <Container>
       <Header />
       <Grid>
-        <Card amount={currencyFormat(10000)} title='Entradas' type='deposit' />
-        <Card amount={currencyFormat(1000)} title='Saidas' type='withdraw' />
-        <Card amount={currencyFormat(9000)} title='Total' type='result' />
+        <Card amount={10000} title='Entradas' type='deposit' />
+        <Card amount={1000} title='Saidas' type='withdraw' />
+        <Card amount={9000} title='Total' type='result' />
       </Grid>
       <Form>
         <input type='text' placeholder='Busque uma transação' />
@@ -23,13 +42,17 @@ export function Home() {
         </button>
       </Form>
       <Table>
-        <tbody>
-          <tr>
-            <td>Desenvolvimento de site</td>
-            <tr>R$ 12.000,00</tr>
-            <tr>Venda</tr>
-            <tr>13/04/2022</tr>
-          </tr>
+        <tbody ref={parentRef}>
+          {transactions.map((transaction) => (
+            <tr>
+              <td>{transaction.title}</td>
+              <Tag isPositive={transaction.amount > 0}>
+                {currencyFormat(transaction.amount)}
+              </Tag>
+              <td>{transaction.type}</td>
+              <td>{transaction.date}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
