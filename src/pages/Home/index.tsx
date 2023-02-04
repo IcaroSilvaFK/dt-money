@@ -1,33 +1,20 @@
 import { BiSearch } from 'react-icons/bi';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useState } from 'react';
 
 import { Card } from '../../components/Card';
+import { dateFormatter } from '../../utils/dateFormatter';
 import { Header } from '../../components/Header';
+import { useFetchTransactions } from '../../hooks/useFetchTransactions';
+import { currencyFormat } from '../../utils/currencyFormatter';
 
 import { Container, Grid, Form, Table, Tag } from './styles';
-import { useEffect, useState } from 'react';
-import { currencyFormat } from '../../utils/currencyFormatter';
-import { api } from '../../configs/global/api';
-import { useFetchTransactions } from '../../hooks/useFetchTransactions';
-
-interface ITransactionProps {
-  description: string;
-  amount: number;
-  category: string;
-  type: 'withdraw' | 'deposit';
-  createdAt: string;
-  id: number;
-}
-
-interface IResumeProps {
-  withdraw: number;
-  deposit: number;
-  resume: number;
-}
 
 export function Home() {
   const [parentRef] = useAutoAnimate<HTMLTableSectionElement>();
   const { resume, data } = useFetchTransactions();
+  // const [inputValue, setInputValue] = useState('');
+
   return (
     <Container>
       <Header />
@@ -54,7 +41,7 @@ export function Home() {
               <td>
                 {transaction.type === 'withdraw' ? 'retirada' : 'depósito'}
               </td>
-              <td>{transaction.createdAt}</td>
+              <td>{dateFormatter(transaction.createdAt)}</td>
             </tr>
           ))}
         </tbody>

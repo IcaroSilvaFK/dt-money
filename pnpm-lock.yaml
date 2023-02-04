@@ -9,6 +9,7 @@ specifiers:
   '@types/react-dom': ^18.0.9
   '@types/styled-components': ^5.1.26
   '@vitejs/plugin-react': ^3.0.0
+  dayjs: ^1.11.7
   react: ^18.2.0
   react-dom: ^18.2.0
   react-hook-form: ^7.43.0
@@ -25,6 +26,7 @@ dependencies:
   '@hookform/resolvers': 2.9.10_react-hook-form@7.43.0
   '@radix-ui/react-dialog': 1.0.2_5ndqzdd6t4rivxsukjv3i3ak2q
   '@tanstack/react-query': 4.24.4_biqbaboplfbrettd7655fr4n2y
+  dayjs: 1.11.7
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.43.0_react@18.2.0
@@ -905,6 +907,10 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
