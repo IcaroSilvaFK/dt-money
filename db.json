@@ -1,0 +1,36 @@
+{
+  "transactions": [
+    {
+      "description": "Compra de ps5 ",
+      "amount": 5000,
+      "category": "Compras",
+      "type": "withdraw",
+      "createdAt": "2023-02-04T00:09:49.525Z",
+      "id": 1
+    },
+    {
+      "description": "Venda de site",
+      "amount": 3500,
+      "category": "venda",
+      "type": "deposit",
+      "createdAt": "2023-02-04T00:10:00.018Z",
+      "id": 2
+    },
+    {
+      "description": "Venda de e-commerce",
+      "amount": 8000,
+      "category": "venda",
+      "type": "deposit",
+      "createdAt": "2023-02-04T00:16:37.801Z",
+      "id": 3
+    },
+    {
+      "description": "Compra de Macbook",
+      "amount": 15000,
+      "category": "Compras",
+      "type": "withdraw",
+      "createdAt": "2023-02-04T00:46:34.288Z",
+      "id": 4
+    }
+  ]
+}

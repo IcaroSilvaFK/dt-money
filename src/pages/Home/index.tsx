@@ -5,34 +5,36 @@ import { Card } from '../../components/Card';
 import { Header } from '../../components/Header';
 
 import { Container, Grid, Form, Table, Tag } from './styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { currencyFormat } from '../../utils/currencyFormatter';
+import { api } from '../../configs/global/api';
+import { useFetchTransactions } from '../../hooks/useFetchTransactions';
+
+interface ITransactionProps {
+  description: string;
+  amount: number;
+  category: string;
+  type: 'withdraw' | 'deposit';
+  createdAt: string;
+  id: number;
+}
+
+interface IResumeProps {
+  withdraw: number;
+  deposit: number;
+  resume: number;
+}
 
 export function Home() {
   const [parentRef] = useAutoAnimate<HTMLTableSectionElement>();
-
-  const [transactions, setTransactions] = useState([
-    {
-      title: 'Desenvolvimento de site',
-      amount: 120,
-      type: 'Venda',
-      date: '13/04/2022',
-    },
-    {
-      title: 'Desenvolvimento de site',
-      amount: -40,
-      type: 'Venda',
-      date: '13/04/2022',
-    },
-  ]);
-
+  const { resume, data } = useFetchTransactions();
   return (
     <Container>
       <Header />
       <Grid>
-        <Card amount={10000} title='Entradas' type='deposit' />
-        <Card amount={1000} title='Saidas' type='withdraw' />
-        <Card amount={9000} title='Total' type='result' />
+        <Card amount={resume?.deposit ?? 0} title='Entradas' type='deposit' />
+        <Card amount={resume?.withdraw ?? 0} title='Saidas' type='withdraw' />
+        <Card amount={resume?.resume ?? 0} title='Total' type='result' />
       </Grid>
       <Form>
         <input type='text' placeholder='Busque por transações' />
@@ -43,14 +45,16 @@ export function Home() {
       </Form>
       <Table>
         <tbody ref={parentRef}>
-          {transactions.map((transaction) => (
-            <tr>
-              <td>{transaction.title}</td>
-              <Tag isPositive={transaction.amount > 0}>
+          {data?.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.description}</td>
+              <Tag isPositive={transaction.type !== 'withdraw'}>
                 {currencyFormat(transaction.amount)}
               </Tag>
-              <td>{transaction.type}</td>
-              <td>{transaction.date}</td>
+              <td>
+                {transaction.type === 'withdraw' ? 'retirada' : 'depósito'}
+              </td>
+              <td>{transaction.createdAt}</td>
             </tr>
           ))}
         </tbody>
