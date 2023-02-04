@@ -21,7 +21,7 @@ export function useFetchTransactions() {
 
   function handleConvertResume() {
     if (!data) return;
-    const amountResume = data!.reduce(
+    const amountResume = data.reduce(
       (acc, currentItem) => {
         if (currentItem.type === 'deposit') {
           acc.deposit += currentItem.amount;
