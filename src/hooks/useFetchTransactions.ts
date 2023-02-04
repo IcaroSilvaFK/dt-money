@@ -1,47 +1,47 @@
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { requestTransactions } from '../services/request-transactions';
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { requestTransactions } from '../services/request-transactions'
 
 interface IResumeProps {
-  withdraw: number;
-  deposit: number;
-  resume: number;
+  withdraw: number
+  deposit: number
+  resume: number
 }
 
 export function useFetchTransactions() {
   const { data, isLoading, isError } = useQuery(
     ['@transactions'],
-    requestTransactions
-  );
-  const [resume, setResume] = useState<IResumeProps | null>(null);
+    requestTransactions,
+  )
+  const [resume, setResume] = useState<IResumeProps | null>(null)
 
   useEffect(() => {
-    handleConvertResume();
-  }, [data]);
+    handleConvertResume()
+  }, [data])
 
   function handleConvertResume() {
-    if (!data) return;
+    if (!data) return
     const amountResume = data.reduce(
       (acc, currentItem) => {
         if (currentItem.type === 'deposit') {
-          acc.deposit += currentItem.amount;
-          acc.resume += currentItem.amount;
+          acc.deposit += currentItem.amount
+          acc.resume += currentItem.amount
         }
         if (currentItem.type === 'withdraw') {
-          acc.withdraw += currentItem.amount;
-          acc.resume -= currentItem.amount;
+          acc.withdraw += currentItem.amount
+          acc.resume -= currentItem.amount
         }
 
-        return acc;
+        return acc
       },
       {
         withdraw: 0,
         deposit: 0,
         resume: 0,
-      }
-    );
+      },
+    )
 
-    setResume(amountResume);
+    setResume(amountResume)
   }
 
   return {
@@ -49,5 +49,5 @@ export function useFetchTransactions() {
     isLoading,
     isError,
     resume,
-  };
+  }
 }
